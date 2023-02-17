@@ -1,0 +1,5 @@
+ID,Origen,Destino,Dia_llegada,Dia_vuelta,Hora_salida,Hora_vuelta,Avion_ID
+1,Menorca,Mallorca,15/5/2023,18/5/2023,NULL,NULL,NULL
+2,Menorca,Barcelona,17/5/2023,22/5/2023,NULL,NULL,NULL
+3,Menorca,Madrid,4/6/2023,NULL,NULL,NULL,NULL
+4,Menorca,Granada,8/6/2023,NULL,NULL,NULL,NULL
