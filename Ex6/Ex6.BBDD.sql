@@ -15,22 +15,6 @@ CREATE SCHEMA IF NOT EXISTS `Ex6.BBDD` ;
 USE `Ex6.BBDD` ;
 
 -- -----------------------------------------------------
--- Table `Ex6.BBDD`.`Pasajero`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Ex6.BBDD`.`Pasajero` (
-  `Pasaporte` VARCHAR(10) NOT NULL,
-  `DNI` VARCHAR(45) NOT NULL,
-  `Nombre` VARCHAR(45) NOT NULL,
-  `Apellido` VARCHAR(45) NOT NULL,
-  `Gmail` VARCHAR(45) NOT NULL,
-  `Telefono` VARCHAR(45) NOT NULL,
-  `Dirrecion` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`Pasaporte`),
-  UNIQUE INDEX `DNI_UNIQUE` (`Pasaporte` ASC) VISIBLE)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `Ex6.BBDD`.`Avion`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Ex6.BBDD`.`Avion` (
@@ -66,26 +50,42 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `Ex6.BBDD`.`Pasajero`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Ex6.BBDD`.`Pasajero` (
+  `Pasaporte` VARCHAR(10) NOT NULL,
+  `DNI` VARCHAR(45) NOT NULL,
+  `Nombre` VARCHAR(45) NOT NULL,
+  `Apellido` VARCHAR(45) NOT NULL,
+  `Gmail` VARCHAR(45) NOT NULL,
+  `Telefono` VARCHAR(45) NOT NULL,
+  `Dirrecion` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`Pasaporte`),
+  UNIQUE INDEX `DNI_UNIQUE` (`Pasaporte` ASC) VISIBLE)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `Ex6.BBDD`.`Reserva`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Ex6.BBDD`.`Reserva` (
   `ID` INT NOT NULL,
   `Dia_Reserva` VARCHAR(45) NOT NULL,
   `Importe_tot` VARCHAR(45) NOT NULL,
-  `Pasajero_DNI` VARCHAR(10) NOT NULL,
   `Vuelo_ID` INT NOT NULL,
+  `Pasajero_Pasaporte` VARCHAR(10) NOT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE INDEX `ID_UNIQUE` (`ID` ASC) VISIBLE,
-  INDEX `fk_Reserva_Pasajero_idx` (`Pasajero_DNI` ASC) VISIBLE,
   INDEX `fk_Reserva_Vuelo1_idx` (`Vuelo_ID` ASC) VISIBLE,
-  CONSTRAINT `fk_Reserva_Pasajero`
-    FOREIGN KEY (`Pasajero_DNI`)
-    REFERENCES `Ex6.BBDD`.`Pasajero` (`Pasaporte`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+  INDEX `fk_Reserva_Pasajero1_idx` (`Pasajero_Pasaporte` ASC) VISIBLE,
   CONSTRAINT `fk_Reserva_Vuelo1`
     FOREIGN KEY (`Vuelo_ID`)
     REFERENCES `Ex6.BBDD`.`Vuelo` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Reserva_Pasajero1`
+    FOREIGN KEY (`Pasajero_Pasaporte`)
+    REFERENCES `Ex6.BBDD`.`Pasajero` (`Pasaporte`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
